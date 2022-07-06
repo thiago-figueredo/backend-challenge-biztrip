@@ -1,0 +1,365 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: 'Users API'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /api/users:
+    get:
+      summary: 'Get all users'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"users\": [\n     {\n        \"id\": \"6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c\",\n        \"name\": \"foo\",\n        \"email\": \"foo@gmail.com\",\n     },\n     {\n        \"id\": \"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d\",\n        \"name\": \"bar\",\n        \"email\": \"bar@gmail.com\",\n     },\n  ]\n}"
+      tags:
+        - 'User Management'
+      security: []
+    post:
+      summary: 'Create a user'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'valid user'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+        400:
+          description: 'user empty'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  messsage:
+                    name:
+                      - 'The name field is required.'
+                    email:
+                      - 'The email field is required.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  messsage:
+                    type: object
+                    example:
+                      name:
+                        - 'The name field is required.'
+                      email:
+                        - 'The email field is required.'
+                      password:
+                        - 'The password field is required.'
+      tags:
+        - 'User Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ''
+                  example: deleniti
+                name:
+                  type: string
+                  description: ''
+                  example: dolore
+                email:
+                  type: string
+                  description: ''
+                  example: quos
+                password:
+                  type: string
+                  description: ''
+                  example: laborum
+              required:
+                - name
+                - email
+                - password
+      security: []
+  '/api/users/{id}':
+    get:
+      summary: 'Get user by id'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'user found by id'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n    \"id\": \"360b90ce-7538-4d5b-b960-5851697227b6\",\n    \"name\": \"name of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n    \"email\": \"email of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n}"
+        400:
+          description: 'user not found by id'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n    \"message\": \"user with id \"360b90ce-7538-4d5b-b960-5851697227b6\" not found\"\n}"
+      tags:
+        - 'User Management'
+      security: []
+    put:
+      summary: 'Update user by id'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'valid user id'
+        400:
+          description: 'invalid user'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message:
+                    name:
+                      - 'The name field is required.'
+                    email:
+                      - 'The email field is required.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  message:
+                    type: object
+                    example:
+                      name:
+                        - 'The name field is required.'
+                      email:
+                        - 'The email field is required.'
+                      password:
+                        - 'The password field is required.'
+        404:
+          description: 'invalid user id'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"message\": \"user with id \"123456789\" not found\"\n}"
+      tags:
+        - 'User Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string.
+                  description: ''
+                  example: '"123456789"'
+                name:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                email:
+                  type: string
+                  description: ''
+                  example: labore
+                password:
+                  type: string
+                  description: ''
+                  example: nihil
+              required:
+                - name
+                - email
+                - password
+      security: []
+    patch:
+      summary: 'Update user by id'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'valid user id'
+        400:
+          description: 'invalid user'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message:
+                    name:
+                      - 'The name field is required.'
+                    email:
+                      - 'The email field is required.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  message:
+                    type: object
+                    example:
+                      name:
+                        - 'The name field is required.'
+                      email:
+                        - 'The email field is required.'
+                      password:
+                        - 'The password field is required.'
+        404:
+          description: 'invalid user id'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"message\": \"user with id \"123456789\" not found\"\n}"
+      tags:
+        - 'User Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string.
+                  description: ''
+                  example: '"123456789"'
+                name:
+                  type: string
+                  description: ''
+                  example: quasi
+                email:
+                  type: string
+                  description: ''
+                  example: dicta
+                password:
+                  type: string
+                  description: ''
+                  example: exercitationem
+              required:
+                - name
+                - email
+                - password
+      security: []
+    delete:
+      summary: 'Delete user by id'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'user deleted'
+        400:
+          description: 'user with id'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "abcdefghijklmnopqrs\" not found\" {\n  \"message\": \"user with id \"abcdefghijklmnopqrs\" not found\"\n}"
+      tags:
+        - 'User Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: ''
+        example: qui
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: 'User Management'
+    description: "\nAPI to manager users"
