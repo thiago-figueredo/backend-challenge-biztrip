@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "611abc3c-7a18-4cd7-9456-5a87d9ff8b1a",
+        "_postman_id": "fe67343d-72c8-40b4-bf13-2b057d0eaff0",
         "description": "Users API",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -49,8 +49,14 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"users\": [\n     {\n        \"id\": \"6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c\",\n        \"name\": \"foo\",\n        \"email\": \"foo@gmail.com\",\n     },\n     {\n        \"id\": \"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d\",\n        \"name\": \"bar\",\n        \"email\": \"bar@gmail.com\",\n     },\n  ]\n}",
-                            "name": "success"
+                            "body": "{\n  \"users\": []\n}",
+                            "name": "users with 0 elements"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"users\": [\n     {\n        \"id\": \"6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c\",\n        \"role\": \"user\",\n        \"name\": \"foo\",\n        \"email\": \"foo@gmail.com\"\n     },\n     {\n        \"id\": \"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d\",\n        \"role\": \"user\",\n        \"name\": \"bar\",\n        \"email\": \"bar@gmail.com\"\n     },\n  ]\n}",
+                            "name": "users with 2 elements"
                         }
                     ]
                 },
@@ -66,7 +72,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "consequatur",
                                     "description": ""
                                 }
                             ]
@@ -92,7 +98,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n    \"id\": \"360b90ce-7538-4d5b-b960-5851697227b6\",\n    \"name\": \"name of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n    \"email\": \"email of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n}",
+                            "body": "{\n    \"id\": \"360b90ce-7538-4d5b-b960-5851697227b6\",\n    \"role\": \"user\",\n    \"name\": \"name of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n    \"email\": \"email of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n}",
                             "name": "user found by id"
                         },
                         {
@@ -125,7 +131,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"deleniti\",\"name\":\"dolore\",\"email\":\"quos\",\"password\":\"laborum\"}"
+                            "raw": "{\"id\":\"molestias\",\"role\":\"sunt\",\"name\":\"ipsa\",\"email\":\"voluptatem\",\"password\":\"praesentium\"}"
                         },
                         "description": "",
                         "auth": {
@@ -142,7 +148,7 @@
                         {
                             "header": [],
                             "code": 400,
-                            "body": "{\n    \"messsage\": {\n        \"name\": [\"The name field is required.\"],\n        \"email\": [\"The email field is required.\"],\n        \"password\": [\"The password field is required.\"]\n    }\n}",
+                            "body": "{\n    \"message\": {\n        \"name\": [\"The name field is required.\"],\n        \"email\": [\"The email field is required.\"],\n        \"password\": [\"The password field is required.\"]\n    }\n}",
                             "name": "user empty"
                         }
                     ]
@@ -159,7 +165,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "repellat",
+                                    "value": "repellendus",
                                     "description": ""
                                 }
                             ]
@@ -177,7 +183,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"voluptatem\",\"email\":\"labore\",\"password\":\"nihil\"}"
+                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"consequatur\",\"email\":\"iusto\",\"password\":\"rerum\"}"
                         },
                         "description": "",
                         "auth": {
@@ -217,7 +223,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "temporibus",
                                     "description": ""
                                 }
                             ]
@@ -235,7 +241,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"quasi\",\"email\":\"dicta\",\"password\":\"exercitationem\"}"
+                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"explicabo\",\"email\":\"maiores\",\"password\":\"ut\"}"
                         },
                         "description": "",
                         "auth": {
@@ -271,6 +277,305 @@
                             "path": "api\/users\/:id",
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "%22abcdefghijklmnopqrs%22",
+                                    "description": "required."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "{}",
+                            "name": "user deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "abcdefghijklmnopqrs\" not found\" {\n  \"message\": \"user with id \"abcdefghijklmnopqrs\" not found\"\n}",
+                            "name": "user with id"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get all users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"users\": []\n}",
+                            "name": "users with 0 elements"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"users\": [\n     {\n        \"id\": \"6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c\",\n        \"role\": \"user\",\n        \"name\": \"foo\",\n        \"email\": \"foo@gmail.com\"\n     },\n     {\n        \"id\": \"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d\",\n        \"role\": \"user\",\n        \"name\": \"bar\",\n        \"email\": \"bar@gmail.com\"\n     },\n  ]\n}",
+                            "name": "users with 2 elements"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get user by id",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "rerum",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": \"360b90ce-7538-4d5b-b960-5851697227b6\",\n    \"role\": \"user\",\n    \"name\": \"name of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n    \"email\": \"email of user with id \"62e7acfd-2d43-4add-b9e2-f63214bbd4ec\"\",\n}",
+                            "name": "user found by id"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n    \"message\": \"user with id \"360b90ce-7538-4d5b-b960-5851697227b6\" not found\"\n}",
+                            "name": "user not found by id"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"rem\",\"role\":\"ut\",\"name\":\"esse\",\"email\":\"aut\",\"password\":\"sed\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{}",
+                            "name": "valid user"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n    \"message\": {\n        \"name\": [\"The name field is required.\"],\n        \"email\": [\"The email field is required.\"],\n        \"password\": [\"The password field is required.\"]\n    }\n}",
+                            "name": "user empty"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update user by id",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "nostrum",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"explicabo\",\"email\":\"adipisci\",\"password\":\"iste\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "{}",
+                            "name": "valid user id"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"message\": {\n     \"name\": [\"The name field is required.\"],\n     \"email\": [\"The email field is required.\"],\n     \"password\": [\"The password field is required.\"]\n  }\n}",
+                            "name": "invalid user"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"user with id \"123456789\" not found\"\n}",
+                            "name": "invalid user id"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update user by id",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "mollitia",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"\\\"123456789\\\"\",\"name\":\"ut\",\"email\":\"est\",\"password\":\"consequatur\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "{}",
+                            "name": "valid user id"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"message\": {\n     \"name\": [\"The name field is required.\"],\n     \"email\": [\"The email field is required.\"],\n     \"password\": [\"The password field is required.\"]\n  }\n}",
+                            "name": "invalid user"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"user with id \"123456789\" not found\"\n}",
+                            "name": "invalid user id"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete user by id",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admins\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admins\/:id",
                             "variable": [
                                 {
                                     "id": "id",

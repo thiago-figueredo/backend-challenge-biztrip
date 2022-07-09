@@ -1,16 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Users\UserController;
+use Illuminate\Support\Facades\Route;
 
-Route::group(["prefix" => "users", "as" => "users"], function () {
-    Route::get("/", UserController::class . "@index")->name("index");
-    Route::get("/{id}", UserController::class . "@show")->name("show");
+Route::resource("users", UserController::class, ["except" => "update"]);
+Route::put("/users/{id}", UserController::class . "@putUpdate")->name("users.put.update");
+Route::patch("/users/{id}", UserController::class . "@patchUpdate")->name("users.patch.update");
 
-    Route::post("/", UserController::class . "@store")->name("store");
-
-    Route::put("/{id}", UserController::class . "@update")->name("update");
-    Route::patch("/{id}", UserController::class . "@update")->name("update");
-
-    Route::delete("/{id}", UserController::class . "@destroy")->name("destroy");
-});
+Route::resource("admins", UserController::class, ["except" => "update"]);
+Route::put("/admins/{id}", UserController::class . "@putUpdate")->name("admins.put.update");
+Route::patch("/admins/{id}", UserController::class . "@patchUpdate")->name("admins.patch.update");

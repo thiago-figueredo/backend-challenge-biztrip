@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RespondJson implements RespondStrategyInterface
 {
-    private function respond(array $options = [], int $status)
+    private function respond(array $options = [], int $status = Response::HTTP_OK)
     {
         $response = [];
 

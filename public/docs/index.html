@@ -96,6 +96,24 @@
                                     <li class="tocify-item level-2" data-unique="user-management-DELETEapi-users--id-">
                         <a href="#user-management-DELETEapi-users--id-">Delete user by id</a>
                     </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-GETapi-admins">
+                        <a href="#user-management-GETapi-admins">Get all users</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-GETapi-admins--id-">
+                        <a href="#user-management-GETapi-admins--id-">Get user by id</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-POSTapi-admins">
+                        <a href="#user-management-POSTapi-admins">Create a user</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-PUTapi-admins--id-">
+                        <a href="#user-management-PUTapi-admins--id-">Update user by id</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-PATCHapi-admins--id-">
+                        <a href="#user-management-PATCHapi-admins--id-">Update user by id</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="user-management-DELETEapi-admins--id-">
+                        <a href="#user-management-DELETEapi-admins--id-">Delete user by id</a>
+                    </li>
                                                     </ul>
                             </ul>
         
@@ -108,7 +126,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: July 6 2022</li>
+        <li>Last updated: July 7 2022</li>
     </ul>
 </div>
 
@@ -198,7 +216,16 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-users">
             <blockquote>
-            <p>Example response (200, success):</p>
+            <p>Example response (200, users with 0 elements):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;users&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200, users with 2 elements):</p>
         </blockquote>
                 <pre>
 
@@ -206,13 +233,15 @@ response.json()</code></pre></div>
   &quot;users&quot;: [
      {
         &quot;id&quot;: &quot;6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c&quot;,
+        &quot;role&quot;: &quot;user&quot;,
         &quot;name&quot;: &quot;foo&quot;,
-        &quot;email&quot;: &quot;foo@gmail.com&quot;,
+        &quot;email&quot;: &quot;foo@gmail.com&quot;
      },
      {
         &quot;id&quot;: &quot;9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d&quot;,
+        &quot;role&quot;: &quot;user&quot;,
         &quot;name&quot;: &quot;bar&quot;,
-        &quot;email&quot;: &quot;bar@gmail.com&quot;,
+        &quot;email&quot;: &quot;bar@gmail.com&quot;
      },
   ]
 }</code>
@@ -272,7 +301,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/users/qui" \
+    --get "http://localhost:8000/api/users/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -280,7 +309,7 @@ response.json()</code></pre></div>
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/users/qui',
+    'http://localhost:8000/api/users/consequatur',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -294,7 +323,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/qui"
+    "http://localhost:8000/api/users/consequatur"
 );
 
 const headers = {
@@ -312,7 +341,7 @@ fetch(url, {
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/users/qui'
+url = 'http://localhost:8000/api/users/consequatur'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -331,6 +360,7 @@ response.json()</code></pre></div>
 
 <code class="language-json">{
     &quot;id&quot;: &quot;360b90ce-7538-4d5b-b960-5851697227b6&quot;,
+    &quot;role&quot;: &quot;user&quot;,
     &quot;name&quot;: &quot;name of user with id &quot;62e7acfd-2d43-4add-b9e2-f63214bbd4ec&quot;&quot;,
     &quot;email&quot;: &quot;email of user with id &quot;62e7acfd-2d43-4add-b9e2-f63214bbd4ec&quot;&quot;,
 }</code>
@@ -390,7 +420,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="id"
                data-endpoint="GETapi-users--id-"
-               value="qui"
+               value="consequatur"
                data-component="url" hidden>
     <br>
 
@@ -414,10 +444,11 @@ response.json()</code></pre></div>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"deleniti\",
-    \"name\": \"dolore\",
-    \"email\": \"quos\",
-    \"password\": \"laborum\"
+    \"id\": \"molestias\",
+    \"role\": \"sunt\",
+    \"name\": \"ipsa\",
+    \"email\": \"voluptatem\",
+    \"password\": \"praesentium\"
 }"
 </code></pre></div>
 
@@ -432,10 +463,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'id' =&gt; 'deleniti',
-            'name' =&gt; 'dolore',
-            'email' =&gt; 'quos',
-            'password' =&gt; 'laborum',
+            'id' =&gt; 'molestias',
+            'role' =&gt; 'sunt',
+            'name' =&gt; 'ipsa',
+            'email' =&gt; 'voluptatem',
+            'password' =&gt; 'praesentium',
         ],
     ]
 );
@@ -454,10 +486,11 @@ const headers = {
 };
 
 let body = {
-    "id": "deleniti",
-    "name": "dolore",
-    "email": "quos",
-    "password": "laborum"
+    "id": "molestias",
+    "role": "sunt",
+    "name": "ipsa",
+    "email": "voluptatem",
+    "password": "praesentium"
 };
 
 fetch(url, {
@@ -473,10 +506,11 @@ import json
 
 url = 'http://localhost:8000/api/users'
 payload = {
-    "id": "deleniti",
-    "name": "dolore",
-    "email": "quos",
-    "password": "laborum"
+    "id": "molestias",
+    "role": "sunt",
+    "name": "ipsa",
+    "email": "voluptatem",
+    "password": "praesentium"
 }
 headers = {
   'Content-Type': 'application/json',
@@ -502,7 +536,7 @@ response.json()</code></pre></div>
                 <pre>
 
 <code class="language-json">{
-    &quot;messsage&quot;: {
+    &quot;message&quot;: {
         &quot;name&quot;: [
             &quot;The name field is required.&quot;
         ],
@@ -561,7 +595,17 @@ response.json()</code></pre></div>
                 <input type="text"
                name="id"
                data-endpoint="POSTapi-users"
-               value="deleniti"
+               value="molestias"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>role</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="role"
+               data-endpoint="POSTapi-users"
+               value="sunt"
                data-component="body" hidden>
     <br>
 
@@ -571,7 +615,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-users"
-               value="dolore"
+               value="ipsa"
                data-component="body" hidden>
     <br>
 
@@ -581,7 +625,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-users"
-               value="quos"
+               value="voluptatem"
                data-component="body" hidden>
     <br>
 
@@ -591,7 +635,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-users"
-               value="laborum"
+               value="praesentium"
                data-component="body" hidden>
     <br>
 
@@ -611,14 +655,14 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/users/repellat" \
+    "http://localhost:8000/api/users/repellendus" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"id\": \"\\\"123456789\\\"\",
-    \"name\": \"voluptatem\",
-    \"email\": \"labore\",
-    \"password\": \"nihil\"
+    \"name\": \"consequatur\",
+    \"email\": \"iusto\",
+    \"password\": \"rerum\"
 }"
 </code></pre></div>
 
@@ -626,7 +670,7 @@ response.json()</code></pre></div>
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost:8000/api/users/repellat',
+    'http://localhost:8000/api/users/repellendus',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -634,9 +678,9 @@ $response = $client-&gt;put(
         ],
         'json' =&gt; [
             'id' =&gt; '"123456789"',
-            'name' =&gt; 'voluptatem',
-            'email' =&gt; 'labore',
-            'password' =&gt; 'nihil',
+            'name' =&gt; 'consequatur',
+            'email' =&gt; 'iusto',
+            'password' =&gt; 'rerum',
         ],
     ]
 );
@@ -646,7 +690,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/repellat"
+    "http://localhost:8000/api/users/repellendus"
 );
 
 const headers = {
@@ -656,9 +700,9 @@ const headers = {
 
 let body = {
     "id": "\"123456789\"",
-    "name": "voluptatem",
-    "email": "labore",
-    "password": "nihil"
+    "name": "consequatur",
+    "email": "iusto",
+    "password": "rerum"
 };
 
 fetch(url, {
@@ -672,12 +716,12 @@ fetch(url, {
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/users/repellat'
+url = 'http://localhost:8000/api/users/repellendus'
 payload = {
     "id": "\"123456789\"",
-    "name": "voluptatem",
-    "email": "labore",
-    "password": "nihil"
+    "name": "consequatur",
+    "email": "iusto",
+    "password": "rerum"
 }
 headers = {
   'Content-Type': 'application/json',
@@ -770,7 +814,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="id"
                data-endpoint="PUTapi-users--id-"
-               value="repellat"
+               value="repellendus"
                data-component="url" hidden>
     <br>
 
@@ -791,7 +835,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-users--id-"
-               value="voluptatem"
+               value="consequatur"
                data-component="body" hidden>
     <br>
 
@@ -801,7 +845,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="email"
                data-endpoint="PUTapi-users--id-"
-               value="labore"
+               value="iusto"
                data-component="body" hidden>
     <br>
 
@@ -811,7 +855,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="password"
                data-endpoint="PUTapi-users--id-"
-               value="nihil"
+               value="rerum"
                data-component="body" hidden>
     <br>
 
@@ -831,14 +875,14 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/users/voluptatem" \
+    "http://localhost:8000/api/users/temporibus" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"id\": \"\\\"123456789\\\"\",
-    \"name\": \"quasi\",
-    \"email\": \"dicta\",
-    \"password\": \"exercitationem\"
+    \"name\": \"explicabo\",
+    \"email\": \"maiores\",
+    \"password\": \"ut\"
 }"
 </code></pre></div>
 
@@ -846,7 +890,7 @@ response.json()</code></pre></div>
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/users/voluptatem',
+    'http://localhost:8000/api/users/temporibus',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -854,9 +898,9 @@ $response = $client-&gt;patch(
         ],
         'json' =&gt; [
             'id' =&gt; '"123456789"',
-            'name' =&gt; 'quasi',
-            'email' =&gt; 'dicta',
-            'password' =&gt; 'exercitationem',
+            'name' =&gt; 'explicabo',
+            'email' =&gt; 'maiores',
+            'password' =&gt; 'ut',
         ],
     ]
 );
@@ -866,7 +910,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/voluptatem"
+    "http://localhost:8000/api/users/temporibus"
 );
 
 const headers = {
@@ -876,9 +920,9 @@ const headers = {
 
 let body = {
     "id": "\"123456789\"",
-    "name": "quasi",
-    "email": "dicta",
-    "password": "exercitationem"
+    "name": "explicabo",
+    "email": "maiores",
+    "password": "ut"
 };
 
 fetch(url, {
@@ -892,12 +936,12 @@ fetch(url, {
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/users/voluptatem'
+url = 'http://localhost:8000/api/users/temporibus'
 payload = {
     "id": "\"123456789\"",
-    "name": "quasi",
-    "email": "dicta",
-    "password": "exercitationem"
+    "name": "explicabo",
+    "email": "maiores",
+    "password": "ut"
 }
 headers = {
   'Content-Type': 'application/json',
@@ -990,7 +1034,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="id"
                data-endpoint="PATCHapi-users--id-"
-               value="voluptatem"
+               value="temporibus"
                data-component="url" hidden>
     <br>
 
@@ -1011,7 +1055,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="PATCHapi-users--id-"
-               value="quasi"
+               value="explicabo"
                data-component="body" hidden>
     <br>
 
@@ -1021,7 +1065,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="email"
                data-endpoint="PATCHapi-users--id-"
-               value="dicta"
+               value="maiores"
                data-component="body" hidden>
     <br>
 
@@ -1031,7 +1075,7 @@ response.json()</code></pre></div>
                 <input type="text"
                name="password"
                data-endpoint="PATCHapi-users--id-"
-               value="exercitationem"
+               value="ut"
                data-component="body" hidden>
     <br>
 
@@ -1164,6 +1208,1071 @@ response.json()</code></pre></div>
                 <input type="text"
                name="id"
                data-endpoint="DELETEapi-users--id-"
+               value=""abcdefghijklmnopqrs""
+               data-component="url" hidden>
+    <br>
+<p>required.</p>
+            </p>
+                    </form>
+
+            <h2 id="user-management-GETapi-admins">Get all users</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admins">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/admins" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/admins',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admins">
+            <blockquote>
+            <p>Example response (200, users with 0 elements):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;users&quot;: []
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200, users with 2 elements):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+  &quot;users&quot;: [
+     {
+        &quot;id&quot;: &quot;6a1fc3d7-1e74-4c43-8a9f-c662c09abf3c&quot;,
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;name&quot;: &quot;foo&quot;,
+        &quot;email&quot;: &quot;foo@gmail.com&quot;
+     },
+     {
+        &quot;id&quot;: &quot;9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d&quot;,
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;name&quot;: &quot;bar&quot;,
+        &quot;email&quot;: &quot;bar@gmail.com&quot;
+     },
+  ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admins" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admins"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admins"></code></pre>
+</span>
+<span id="execution-error-GETapi-admins" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admins"></code></pre>
+</span>
+<form id="form-GETapi-admins" data-method="GET"
+      data-path="api/admins"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admins', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admins"
+                    onclick="tryItOut('GETapi-admins');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admins"
+                    onclick="cancelTryOut('GETapi-admins');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admins" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admins</code></b>
+        </p>
+                    </form>
+
+            <h2 id="user-management-GETapi-admins--id-">Get user by id</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/admins/rerum" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/admins/rerum',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins/rerum"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins/rerum'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admins--id-">
+            <blockquote>
+            <p>Example response (200, user found by id):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;id&quot;: &quot;360b90ce-7538-4d5b-b960-5851697227b6&quot;,
+    &quot;role&quot;: &quot;user&quot;,
+    &quot;name&quot;: &quot;name of user with id &quot;62e7acfd-2d43-4add-b9e2-f63214bbd4ec&quot;&quot;,
+    &quot;email&quot;: &quot;email of user with id &quot;62e7acfd-2d43-4add-b9e2-f63214bbd4ec&quot;&quot;,
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, user not found by id):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;user with id &quot;360b90ce-7538-4d5b-b960-5851697227b6&quot; not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admins--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admins--id-"></code></pre>
+</span>
+<form id="form-GETapi-admins--id-" data-method="GET"
+      data-path="api/admins/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admins--id-"
+                    onclick="tryItOut('GETapi-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admins--id-"
+                    onclick="cancelTryOut('GETapi-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admins--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admins/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETapi-admins--id-"
+               value="rerum"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                    </form>
+
+            <h2 id="user-management-POSTapi-admins">Create a user</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-admins">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/admins" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"id\": \"rem\",
+    \"role\": \"ut\",
+    \"name\": \"esse\",
+    \"email\": \"aut\",
+    \"password\": \"sed\"
+}"
+</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/api/admins',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'id' =&gt; 'rem',
+            'role' =&gt; 'ut',
+            'name' =&gt; 'esse',
+            'email' =&gt; 'aut',
+            'password' =&gt; 'sed',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id": "rem",
+    "role": "ut",
+    "name": "esse",
+    "email": "aut",
+    "password": "sed"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins'
+payload = {
+    "id": "rem",
+    "role": "ut",
+    "name": "esse",
+    "email": "aut",
+    "password": "sed"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-admins">
+            <blockquote>
+            <p>Example response (201, valid user):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, user empty):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ],
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ],
+        &quot;password&quot;: [
+            &quot;The password field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-admins" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-admins"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-admins"></code></pre>
+</span>
+<span id="execution-error-POSTapi-admins" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-admins"></code></pre>
+</span>
+<form id="form-POSTapi-admins" data-method="POST"
+      data-path="api/admins"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-admins', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-admins"
+                    onclick="tryItOut('POSTapi-admins');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-admins"
+                    onclick="cancelTryOut('POSTapi-admins');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-admins" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/admins</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="POSTapi-admins"
+               value="rem"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>role</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="role"
+               data-endpoint="POSTapi-admins"
+               value="ut"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-admins"
+               value="esse"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-admins"
+               value="aut"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-admins"
+               value="sed"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="user-management-PUTapi-admins--id-">Update user by id</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost:8000/api/admins/nostrum" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"id\": \"\\\"123456789\\\"\",
+    \"name\": \"explicabo\",
+    \"email\": \"adipisci\",
+    \"password\": \"iste\"
+}"
+</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;put(
+    'http://localhost:8000/api/admins/nostrum',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'id' =&gt; '"123456789"',
+            'name' =&gt; 'explicabo',
+            'email' =&gt; 'adipisci',
+            'password' =&gt; 'iste',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins/nostrum"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id": "\"123456789\"",
+    "name": "explicabo",
+    "email": "adipisci",
+    "password": "iste"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins/nostrum'
+payload = {
+    "id": "\"123456789\"",
+    "name": "explicabo",
+    "email": "adipisci",
+    "password": "iste"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-admins--id-">
+            <blockquote>
+            <p>Example response (204, valid user id):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, invalid user):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ],
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ],
+        &quot;password&quot;: [
+            &quot;The password field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, invalid user id):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+  &quot;message&quot;: &quot;user with id &quot;123456789&quot; not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-admins--id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-admins--id-"></code></pre>
+</span>
+<form id="form-PUTapi-admins--id-" data-method="PUT"
+      data-path="api/admins/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-admins--id-"
+                    onclick="tryItOut('PUTapi-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-admins--id-"
+                    onclick="cancelTryOut('PUTapi-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-admins--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/admins/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="PUTapi-admins--id-"
+               value="nostrum"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>id</code></b>&nbsp;&nbsp;<small>string.</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="PUTapi-admins--id-"
+               value=""123456789""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PUTapi-admins--id-"
+               value="explicabo"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="PUTapi-admins--id-"
+               value="adipisci"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="PUTapi-admins--id-"
+               value="iste"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="user-management-PATCHapi-admins--id-">Update user by id</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost:8000/api/admins/mollitia" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"id\": \"\\\"123456789\\\"\",
+    \"name\": \"ut\",
+    \"email\": \"est\",
+    \"password\": \"consequatur\"
+}"
+</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;patch(
+    'http://localhost:8000/api/admins/mollitia',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'id' =&gt; '"123456789"',
+            'name' =&gt; 'ut',
+            'email' =&gt; 'est',
+            'password' =&gt; 'consequatur',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins/mollitia"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id": "\"123456789\"",
+    "name": "ut",
+    "email": "est",
+    "password": "consequatur"
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins/mollitia'
+payload = {
+    "id": "\"123456789\"",
+    "name": "ut",
+    "email": "est",
+    "password": "consequatur"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PATCH', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-admins--id-">
+            <blockquote>
+            <p>Example response (204, valid user id):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, invalid user):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ],
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ],
+        &quot;password&quot;: [
+            &quot;The password field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, invalid user id):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+  &quot;message&quot;: &quot;user with id &quot;123456789&quot; not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-admins--id-"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-admins--id-"></code></pre>
+</span>
+<form id="form-PATCHapi-admins--id-" data-method="PATCH"
+      data-path="api/admins/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-admins--id-"
+                    onclick="tryItOut('PATCHapi-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-admins--id-"
+                    onclick="cancelTryOut('PATCHapi-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-admins--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/admins/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="PATCHapi-admins--id-"
+               value="mollitia"
+               data-component="url" hidden>
+    <br>
+
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>id</code></b>&nbsp;&nbsp;<small>string.</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="PATCHapi-admins--id-"
+               value=""123456789""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PATCHapi-admins--id-"
+               value="ut"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="PATCHapi-admins--id-"
+               value="est"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="PATCHapi-admins--id-"
+               value="consequatur"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="user-management-DELETEapi-admins--id-">Delete user by id</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost:8000/api/admins/&amp;quot;abcdefghijklmnopqrs&amp;quot;" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost:8000/api/admins/&amp;quot;abcdefghijklmnopqrs&amp;quot;',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/admins/&amp;quot;abcdefghijklmnopqrs&amp;quot;"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/admins/&amp;quot;abcdefghijklmnopqrs&amp;quot;'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-admins--id-">
+            <blockquote>
+            <p>Example response (204, user deleted):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, user with id):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">abcdefghijklmnopqrs&quot; not found&quot; {
+  &quot;message&quot;: &quot;user with id &quot;abcdefghijklmnopqrs&quot; not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-admins--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-admins--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-admins--id-" data-method="DELETE"
+      data-path="api/admins/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-admins--id-"
+                    onclick="tryItOut('DELETEapi-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-admins--id-"
+                    onclick="cancelTryOut('DELETEapi-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-admins--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/admins/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="DELETEapi-admins--id-"
                value=""abcdefghijklmnopqrs""
                data-component="url" hidden>
     <br>
