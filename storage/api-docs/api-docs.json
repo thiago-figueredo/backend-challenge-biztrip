@@ -1,19 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Users API",
-        "version": "0.0.1"
+        "title": "Example for response examples value",
+        "version": "1.0"
     },
     "paths": {
-        "/api/users": {
-            "get": {
-                "operationId": "ac4677cdc04c8254bc8e5b4bc1ea8607",
-                "responses": {
-                    "200": {
-                        "description": "All users"
-                    }
-                }
-            }
-        }
+        "/tools": {}
     }
 }

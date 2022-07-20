@@ -14,12 +14,12 @@ return [
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => 'Users API',
+    'description' => '',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
      */
-    'base_url' => env("APP_URL") . ":" . env("APP_PORT"),
+    'base_url' => "",
 
     /*
      * Tell Scribe what routes to generate documentation for.
@@ -36,7 +36,7 @@ return [
                 /*
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters). Example: 'users/*'.
                  */
-                'prefixes' => ['api/*'],
+                'prefixes' => ['*'],
 
                 /*
                  * Match only routes whose domains match this pattern (use * as a wildcard to match any characters). Example: 'api.*'.
@@ -191,7 +191,7 @@ return [
          * The base URL for the API tester to use (for example, you can set this to your staging URL).
          * Leave as null to use the current app URL (config(app.url)).
          */
-        'base_url' => env("APP_URL") . ":" . env("APP_PORT"),
+        'base_url' => null,
 
         /**
          * Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header. Needed if you're using Laravel Sanctum.
@@ -268,9 +268,7 @@ INTRO,
      */
     'example_languages' => [
         'bash',
-        'php',
         'javascript',
-        'python'
     ],
 
     /*
@@ -303,7 +301,7 @@ INTRO,
          * Manually override some generated content in the spec. Dot notation is supported.
          */
         'overrides' => [
-            // 'info.version' => '2.0.0',
+            'info.version' => '3.0.0',
         ],
     ],
 

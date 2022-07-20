@@ -1,0 +1,298 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Backend-Challenge-Biztrip
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: http://localhost:3000
+
+components:
+  schemas:
+    UserRequestBody:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    CreateToolRequestBody:
+      type: object
+      required:
+        - title
+        - link
+        - description
+        - tags
+      properties:
+        title:
+          type: string
+        link:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      example:
+        title: "hotel"
+        link: "https://github.com/typicode/hotel"
+        description: "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box."
+        tags:
+          - "node"
+          - "organizing"
+          - "webapps"
+          - "domain"
+          - "developer"
+          - "https"
+          - "proxy"
+
+    GetToolsResponseBody:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        link:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      example:
+        - title: "beach"
+          link: "https://github.com/typicode/beach"
+          description: "The best beach"
+          tags:
+            - "domain"
+            - "vacation"
+            - "sun"
+            - "beach"
+          id: 1
+
+        - title: "hotel"
+          link: "https://github.com/typicode/hotel"
+          description: "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box."
+          tags:
+            - "node"
+            - "organizing"
+            - "webapps"
+            - "domain"
+            - "developer"
+            - "https"
+            - "proxy"
+          id: 2
+
+    CreateToolResponseBody:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        link:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      example:
+        title: "hotel"
+        link: "https://github.com/typicode/hotel"
+        description: "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box."
+        tags:
+          - "node"
+          - "organizing"
+          - "webapps"
+          - "domain"
+          - "developer"
+          - "https"
+          - "proxy"
+        id: 5
+
+    ToolNotFoundError:
+      type: object
+      properties:
+        error:
+          type: boolean
+        message:
+          type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: boolean
+        message:
+          type: array
+          items:
+            type: string
+
+paths:
+  /tools:
+    get:
+      summary: Get all tools
+      responses:
+        200:
+          description: "success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GetToolsResponseBody"
+
+    post:
+      summary: Create new tool
+      description: To create a new tool you need to register in "api/register", and get the login token in "api/login".
+      requestBody:
+        # required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateToolRequestBody"
+
+      responses:
+        201:
+          description: "Valid tool and token"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateToolResponseBody"
+
+        400:
+          description: "Invalid tool"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        401:
+          description: "User not logged"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      summary: Delete tool with id
+      responses:
+        200:
+          description: "When id is valid"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: "When id is not valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToolNotFoundError"
+
+  /api/register:
+    post:
+      summary: "Register user"
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequestBody"
+      responses:
+        201:
+          description: "User has valid email and password"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: "User has invalid email and password"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+        409:
+          description: "User is already registered"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/login:
+    post:
+      summary: "Login a user"
+      description: ""
+      responses:
+        200:
+          description: "User is logged"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+
+        400:
+          description: "User is not registered yet"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+        409:
+          description: "User is already logged in"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/logout:
+    delete:
+      summary: "Logout a user"
+      description: ""
+      responses:
+        200:
+          description: "User has been logout"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: "User is not logged in and try to logout"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
