@@ -1,13 +1,12 @@
 # Requirements 
 
 - PHP >= 7.3
-- Laravel >= 8
+- Laravel 8
 - mysql
 - composer
 
 # Documentation
 See https://documenter.getpostman.com/view/12699485/UzR1J2Me
-
 ---
 
 ## Getting Started
@@ -20,19 +19,13 @@ See https://documenter.getpostman.com/view/12699485/UzR1J2Me
 composer install
 ```
 
-### 2. Copy .env.example to .env
-
-```bash
-cp .env.example .env
-```
-
-### 3. Start mysql server
+### 2. Start mysql server
 
 ```bash
 sudo service mysql start
 ```
 
-### 4. Create Database
+### 3. Create Database
 
 ```bash
 sudo mysql -u root -p
@@ -43,13 +36,31 @@ mysql> exit;
 
 ```
 
-### 5. Run migrations
+### 4. Update create .env file with following variable
+
+- DB_CONNECTION=mysql
+- DB_HOST=127.0.0.1
+- DB_PORT=3306
+- DB_DATABASE=laravel
+- DB_USERNAME=root
+- DB_PASSWORD=your-password
+
+---
+
+### 5. Copy .env.example to .env
+
+```bash
+cp .env.example .env
+```
+
+
+### 6. Run migrations
 
 ```bash
 php artisan migrate
 ```
 
-### 6. Initialize server
+### 7. Initialize server
 
 ```bash
 php artisan server --port=3000;
@@ -59,7 +70,7 @@ php artisan server --port=3000;
 
 ## Other Options
 
-#### If you don't want start application manually, you can run start.sh and set the root password of your system
+#### If you don't want start application manually, you can update .env file and run start.sh.
 
 ```bash
 ./start.sh "your root password"
