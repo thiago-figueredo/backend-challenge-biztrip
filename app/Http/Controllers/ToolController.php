@@ -13,16 +13,15 @@ class ToolController
 
     public function index(Request $request)
     {
-        $tag = $request->tag;
+        $tag = $request->query("tag");
+        $tools = Tool::all();
 
-        if (!$tag) {
-            $tools = Tool::all()->toArray();
-
-            return empty($tools) ? $this->ok("[]") : $this->ok($tools);
+        if (empty($tag)) {
+            return $this->ok($tools->toArray());
         }
 
         $tools_filtered_by_tag = array_values(
-            Tool::all()
+            $tools
                 ->filter(fn (Tool $tool) => in_array($tag, $tool->getAttribute("tags")))
                 ->toArray()
         );
@@ -30,12 +29,12 @@ class ToolController
         return empty($tools_filtered_by_tag) ? $this->badRequest([
             "error" => true,
             "message" => "tool with tag $tag not found"
-        ]) : $tools_filtered_by_tag;
+        ]) : $this->ok($tools_filtered_by_tag);
     }
 
     public function store(StoreToolRequest $request)
     {
-        return Tool::create($request->validated());
+        return Tool::create($request->all());
     }
 
     public function destroy(Request $request, string $id)
@@ -43,10 +42,7 @@ class ToolController
         $tool = Tool::find($id);
 
         if (empty($tool)) {
-            return $this->badRequest([
-                "error" => true,
-                "message" => "Tool with id $id not found"
-            ]);
+            return $this->badRequest(["error" => true, "message" => "Tool not found"]);
         }
 
         $tool->delete();

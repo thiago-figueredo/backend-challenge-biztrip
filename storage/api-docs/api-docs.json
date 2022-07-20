@@ -1,10 +1,37 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Example for response examples value",
-        "version": "1.0"
+        "title": "Backend Challenge Biztrip Docs",
+        "version": "0.0.1"
     },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
     "paths": {
-        "/tools": {}
+        "/tools": {
+            "get": {
+                "tags": [
+                    "tool"
+                ],
+                "summary": "Get tools",
+                "operationId": "40a2c0b49717f5bc669c06a216e5f559",
+                "parameters": [
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
     }
 }

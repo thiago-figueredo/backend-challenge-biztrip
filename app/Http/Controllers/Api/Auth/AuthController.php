@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Requests\AuthUserRequest;
-use App\Http\Requests\JwtRequest;
 use App\Traits\ApiJsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\UserJwtAuth;
 use App\Models\User;
@@ -40,7 +40,7 @@ class AuthController
         $user = $this->getUserByEmailAndPassword($request);
 
         if (empty($user)) {
-            return $this->badRequest([
+            return $this->unauthorized([
                 "error" => true,
                 "message" => "Please register first"
             ]);
@@ -59,19 +59,12 @@ class AuthController
         return $this->ok(["message" => "user logged", "token" => $token]);
     }
 
-    public function logout(JwtRequest $request)
+    public function logout(Request $request)
     {
         $token = substr($request->header("Authorization"), 7);
         $user = $this->getUserByToken($token);
 
-        if ($user->isEmpty()) {
-            return $this->badRequest([
-                "error" => true,
-                "message" => "user with token $token not logged"
-            ]);
-        }
-
         User::destroy($user);
-        return $this->ok(["message" => "user with token $token logged out"]);
+        return $this->ok(["message" => "User logged out"]);
     }
 }

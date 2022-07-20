@@ -22,25 +22,25 @@ class JwtMiddleware
         $token = $request->header("Authorization");
 
         if (empty($token)) {
-            return $this->badRequest([
+            return $this->unauthorized([
                 "error" => true,
                 "message" => "Authorization header is required"
             ]);
         }
 
         if (!$this->validateJwt($token)) {
-            return $this->badRequest([
+            return $this->unauthorized([
                 "error" => true,
-                "message" => "token invalid"
+                "message" => "Authorization token invalid"
             ]);
         }
 
         $user = $this->getUserByToken(substr($token, 7));
 
         if ($user->isEmpty()) {
-            return $this->badRequest([
+            return $this->unauthorized([
                 "error" => true,
-                "message" => "token expired"
+                "message" => "Authorization token expired"
             ]);
         }
 

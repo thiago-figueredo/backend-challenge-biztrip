@@ -1,9 +1,12 @@
-# Requirements
+# Requirements 
 
-- npm 
 - PHP >= 7.3
+- Laravel >= 8
 - mysql
 - composer
+
+# Documentation
+See https://documenter.getpostman.com/view/12699485/UzR1J2Me
 
 ---
 
