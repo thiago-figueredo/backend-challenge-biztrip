@@ -31,7 +31,7 @@ class JwtMiddleware
         if (!$this->validateJwt($token)) {
             return $this->unauthorized([
                 "error" => true,
-                "message" => "Authorization token invalid"
+                "message" => "Authorization token invalid format"
             ]);
         }
 

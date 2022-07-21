@@ -5,8 +5,6 @@
 - mysql
 - composer
 
-# Documentation
-See https://documenter.getpostman.com/view/12699485/UzR1J2Me
 ---
 
 ## Getting Started
@@ -75,3 +73,9 @@ php artisan server --port=3000;
 ```bash
 ./start.sh "your root password"
 ```
+
+## Documentation
+
+- http://localhost:3000/swagger
+
+---

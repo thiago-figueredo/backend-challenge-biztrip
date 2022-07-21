@@ -32,7 +32,7 @@ class AuthController
         }
 
         User::create($payload);
-        return $this->created(["message" => "User created successfully"]);
+        return $this->created(["message" => "User registered successfully"]);
     }
 
     public function login(AuthUserRequest $request)

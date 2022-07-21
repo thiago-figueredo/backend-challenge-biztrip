@@ -11,6 +11,186 @@ info:
 servers:
   - url: http://localhost:3000
 
+paths:
+  /tools:
+    get:
+      summary: Get all tools
+      parameters:
+        - in: query
+        name:  tag
+        schema:
+          type: string
+      responses:
+        200:
+          description: "success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GetToolsResponseBody"
+
+    post:
+      summary: Create new tool
+      description: To create a new tool you need to register in "api/register", and get the login token in "api/login".
+      parameters:
+        - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateToolRequestBody"
+
+      responses:
+        201:
+          description: "Valid tool and token"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateToolResponseBody"
+
+        400:
+          description: "Invalid tool"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        401:
+          description: "User not logged"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      summary: Delete tool with id
+      parameters:
+        - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "When id is valid"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: "When id is not valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToolNotFoundError"
+
+  /api/register:
+    post:
+      summary: "Register user"
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequestBody"
+      responses:
+        201:
+          description: "User has valid email and password"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: "User has invalid email and password"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+        409:
+          description: "User is already registered"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/login:
+    post:
+      summary: "Login a user"
+      description: ""
+      responses:
+        200:
+          description: "User is logged"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+
+        400:
+          description: "User is not registered yet"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+        409:
+          description: "User is already logged in"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/logout:
+    delete:
+      summary: "Logout a user"
+      description: ""
+      parameters:
+        - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "User has been logout"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: "User is not logged in and try to logout"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     UserRequestBody:
@@ -139,160 +319,3 @@ components:
           type: array
           items:
             type: string
-
-paths:
-  /tools:
-    get:
-      summary: Get all tools
-      responses:
-        200:
-          description: "success"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GetToolsResponseBody"
-
-    post:
-      summary: Create new tool
-      description: To create a new tool you need to register in "api/register", and get the login token in "api/login".
-      requestBody:
-        # required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateToolRequestBody"
-
-      responses:
-        201:
-          description: "Valid tool and token"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateToolResponseBody"
-
-        400:
-          description: "Invalid tool"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        401:
-          description: "User not logged"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-    delete:
-      summary: Delete tool with id
-      responses:
-        200:
-          description: "When id is valid"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-        400:
-          description: "When id is not valid"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ToolNotFoundError"
-
-  /api/register:
-    post:
-      summary: "Register user"
-      description: ""
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserRequestBody"
-      responses:
-        201:
-          description: "User has valid email and password"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-        400:
-          description: "User has invalid email and password"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-        409:
-          description: "User is already registered"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: boolean
-                  message:
-                    type: string
-
-  /api/login:
-    post:
-      summary: "Login a user"
-      description: ""
-      responses:
-        200:
-          description: "User is logged"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-
-        400:
-          description: "User is not registered yet"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-        409:
-          description: "User is already logged in"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: boolean
-                  message:
-                    type: string
-
-  /api/logout:
-    delete:
-      summary: "Logout a user"
-      description: ""
-      responses:
-        200:
-          description: "User has been logout"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-        400:
-          description: "User is not logged in and try to logout"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
