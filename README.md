@@ -68,7 +68,7 @@ php artisan server --port=3000;
 
 ## Other Options
 
-#### If you don't want start application manually, you can update .env file and run start.sh.
+#### If you don't want start application manually, you can create .env file with the information of mysql database and run start.sh.
 
 ```bash
 ./start.sh "your root password"
