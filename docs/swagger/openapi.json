@@ -10,374 +10,6 @@
             "url": "http://localhost:3000"
         }
     ],
-    "paths": {
-        "/tools": {
-            "get": {
-                "summary": "Get tools",
-                "parameters": [
-                    {
-                        "name": "tag",
-                        "in": "query",
-                        "required": false
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/GetToolsResponseBody"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "summary": "Create new tool",
-                "description": "To create a new tool you need to register in \"api/register\", and get the login token in \"api/login\".",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateToolRequestBody"
-                            },
-                            "examples": {
-                                "hotel": {
-                                    "value": {
-                                        "title": "hotel",
-                                        "link": "https://github.com/typicode/hotel",
-                                        "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box.",
-                                        "tags": [
-                                            "node",
-                                            "organizing",
-                                            "webapps",
-                                            "domain",
-                                            "developer",
-                                            "https",
-                                            "proxy"
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Valid tool and token",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CreateToolResponseBody"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RequestWithoutAuthorizationHeader"
-                                },
-                                "examples": {
-                                    "Without Authorization token": {
-                                        "value": {
-                                            "error": true,
-                                            "message": "Authorization token is required"
-                                        }
-                                    },
-                                    "Invalid Authorization token": {
-                                        "value": {
-                                            "error": true,
-                                            "message": "Authorization token invalid"
-                                        }
-                                    },
-                                    "Expired Authorization token": {
-                                        "value": {
-                                            "error": true,
-                                            "message": "Authorization token expired"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Valid token and Invalid tool",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/InvalidToolBodyError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tools/{id}": {
-            "delete": {
-                "summary": "Delete tool with id",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "When id is valid",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {}
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "When id is not valid",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "when id is 123456789": {
-                                        "value": {
-                                            "error": true,
-                                            "message": "tool with id 123456789 not found"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/register": {
-            "post": {
-                "summary": "Register user",
-                "description": "",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserRequestBody"
-                            },
-                            "examples": {
-                                "foobar": {
-                                    "value": {
-                                        "email": "foobar@gmail.com",
-                                        "password": "foobar-password"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "User registered",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "value": {
-                                        "message": "User created successfully"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "User has invalid email and password",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MultipleErrorResponse"
-                                },
-                                "examples": {
-
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "User is already registered",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/login": {
-            "post": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserRequestBody"
-                            },
-                            "examples": {
-                                "foobar": {
-                                    "value": {
-                                        "email": "foobar@gmail.com",
-                                        "password": "foobar-password"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User logged",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "token": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "User has invalid email and password",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MultipleErrorResponse"
-                                },
-                                "examples": {
-
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "User is not registered yet",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MultipleErrorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "User is already logged in",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "Login a user"
-            }
-        },
-        "/api/logout": {
-            "delete": {
-                "summary": "Logout a user",
-                "description": "",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User has been logout",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "User is not logged in and try to logout",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MultipleErrorResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
     "components": {
         "securitySchemes": {
             "bearerAuth": {
@@ -389,10 +21,7 @@
         "schemas": {
             "UserRequestBody": {
                 "type": "object",
-                "required": [
-                    "email",
-                    "password"
-                ],
+                "required": true,
                 "properties": {
                     "email": {
                         "type": "string"
@@ -400,6 +29,10 @@
                     "password": {
                         "type": "string"
                     }
+                },
+                "example": {
+                    "email": "foobar@gmail.com",
+                    "password": "foobar-password"
                 }
             },
             "CreateToolRequestBody": {
@@ -658,7 +291,7 @@
                 },
                 "example": {
                     "error": true,
-                    "message": "Authorization token invalid"
+                    "message": "Authorization token invalid format"
                 }
             },
             "RequestWithoutAuthorizationHeader": {
@@ -674,6 +307,458 @@
                 "example": {
                     "error": true,
                     "message": "Authorization header is required"
+                }
+            },
+            "InvalidUserError": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "password": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "message": "The given data was invalid.",
+                    "errors": {
+                        "email": [
+                            "The email field is required."
+                        ],
+                        "password": [
+                            "The password field is required."
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/tools": {
+            "get": {
+                "summary": "Get tools",
+                "parameters": [
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GetToolsResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create new tool",
+                "description": "To create a new tool you need to register in \"api/register\", and get the login token in \"api/login\".",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateToolRequestBody"
+                            },
+                            "examples": {
+                                "hotel": {
+                                    "value": {
+                                        "title": "hotel",
+                                        "link": "https://github.com/typicode/hotel",
+                                        "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box.",
+                                        "tags": [
+                                            "node",
+                                            "organizing",
+                                            "webapps",
+                                            "domain",
+                                            "developer",
+                                            "https",
+                                            "proxy"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Valid tool and token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateToolResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestWithoutAuthorizationHeader"
+                                },
+                                "examples": {
+                                    "Without Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token is required"
+                                        }
+                                    },
+                                    "Invalid Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token invalid format"
+                                        }
+                                    },
+                                    "Expired Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token expired"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Valid token and Invalid tool",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidToolBodyError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tools/{id}": {
+            "delete": {
+                "summary": "Delete tool with id",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "When id is valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "When id is not valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "when id is 123456789": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "tool with id 123456789 not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestWithoutAuthorizationHeader"
+                                },
+                                "examples": {
+                                    "Without Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token is required"
+                                        }
+                                    },
+                                    "Invalid Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token invalid format"
+                                        }
+                                    },
+                                    "Expired Authorization token": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token expired"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "summary": "Register user",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "User registered successfully"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "User is already registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": true,
+                                    "message": "User already registered"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unable to process content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidUserError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1ODQwMjgyMSwiaWF0IjoxNjU4NDAyODIxfQ.HLGyf8OgnS6Xb3hELRcqYsn86TtxvWNjqDeXYItezUg"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not registered yet",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MultipleErrorResponse"
+                                },
+                                "example": {
+                                    "error": true,
+                                    "message": "Please register first"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "User is already logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": true,
+                                    "message": "User already logged"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "User has no email and password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidUserError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Login a user"
+            }
+        },
+        "/api/logout": {
+            "delete": {
+                "summary": "Logout a user",
+                "description": "",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User has been logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "User logged out"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description" : "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "Request without Authorization header": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization header is required"
+                                        }
+                                    },
+                                    "Authorization header expired": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token expired"
+                                        }
+                                    },
+                                    "Authorization token invalid format": {
+                                        "value": {
+                                            "error": true,
+                                            "message": "Authorization token invalid format"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
