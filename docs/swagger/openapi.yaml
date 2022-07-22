@@ -5,7 +5,7 @@ info:
   title: Backend-Challenge-Biztrip
   termsOfService: http://swagger.io/terms/
 servers:
-  - url: http://localhost:3000
+- url: http://localhost:3000
 components:
   securitySchemes:
     bearerAuth:
@@ -15,7 +15,6 @@ components:
   schemas:
     UserRequestBody:
       type: object
-      required: true
       properties:
         email:
           type: string
@@ -27,10 +26,10 @@ components:
     CreateToolRequestBody:
       type: object
       required:
-        - title
-        - link
-        - description
-        - tags
+      - title
+      - link
+      - description
+      - tags
       properties:
         title:
           type: string
@@ -45,17 +44,16 @@ components:
       example:
         title: hotel
         link: https://github.com/typicode/hotel
-        description:
-          Local app manager. Start apps within your browser, developer
+        description: Local app manager. Start apps within your browser, developer
           tool with local .localhost domain and https out of the box.
         tags:
-          - node
-          - organizing
-          - webapps
-          - domain
-          - developer
-          - https
-          - proxy
+        - node
+        - organizing
+        - webapps
+        - domain
+        - developer
+        - https
+        - proxy
     GetToolsResponseBody:
       type: object
       properties:
@@ -72,34 +70,33 @@ components:
           items:
             type: string
       example:
-        - title: beach
-          link: https://github.com/typicode/beach
-          description: The best beach
-          tags:
-            - domain
-            - vacation
-            - sun
-            - beach
-          id: 1
-        - title: hotel
-          link: https://github.com/typicode/hotel
-          description:
-            Local app manager. Start apps within your browser, developer
-            tool with local .localhost domain and https out of the box.
-          tags:
-            - node
-            - organizing
-            - webapps
-            - domain
-            - developer
-            - https
-            - proxy
-          id: 2
+      - title: beach
+        link: https://github.com/typicode/beach
+        description: The best beach
+        tags:
+        - domain
+        - vacation
+        - sun
+        - beach
+        id: 1
+      - title: hotel
+        link: https://github.com/typicode/hotel
+        description: Local app manager. Start apps within your browser, developer
+          tool with local .localhost domain and https out of the box.
+        tags:
+        - node
+        - organizing
+        - webapps
+        - domain
+        - developer
+        - https
+        - proxy
+        id: 2
     CreateToolResponseBody:
       type: object
       properties:
         id:
-          type: int
+          type: integer
         title:
           type: string
         link:
@@ -113,17 +110,16 @@ components:
       example:
         title: hotel
         link: https://github.com/typicode/hotel
-        description:
-          Local app manager. Start apps within your browser, developer
+        description: Local app manager. Start apps within your browser, developer
           tool with local .localhost domain and https out of the box.
         tags:
-          - node
-          - organizing
-          - webapps
-          - domain
-          - developer
-          - https
-          - proxy
+        - node
+        - organizing
+        - webapps
+        - domain
+        - developer
+        - https
+        - proxy
         id: 5
     ErrorResponse:
       type: object
@@ -174,13 +170,13 @@ components:
         message: The given data was invalid.
         errors:
           title:
-            - The title field is required.
+          - The title field is required.
           description:
-            - The description field is required.
+          - The description field is required.
           link:
-            - The link field is required.
+          - The link field is required.
           tags:
-            - The tags field is required.
+          - The tags field is required.
     TitleAlreadyUsedError:
       type: object
       properties:
@@ -197,7 +193,7 @@ components:
         message: The given data was invalid.
         errors:
           title:
-            - The title has already been taken.
+          - The title has already been taken.
     InvalidTokenError:
       type: object
       properties:
@@ -238,19 +234,21 @@ components:
         message: The given data was invalid.
         errors:
           email:
-            - The email field is required.
+          - The email field is required.
           password:
-            - The password field is required.
+          - The password field is required.
 paths:
   "/tools":
     get:
       summary: Get tools
       parameters:
-        - name: tag
-          in: query
-          required: false
+      - name: tag
+        in: query
+        schema:
+          type: string
+        required: false
       responses:
-        "200":
+        '200':
           description: success
           content:
             application/json:
@@ -260,11 +258,10 @@ paths:
                   "$ref": "#/components/schemas/GetToolsResponseBody"
     post:
       summary: Create new tool
-      description:
-        To create a new tool you need to register in "api/register", and
+      description: To create a new tool you need to register in "api/register", and
         get the login token in "api/login".
       security:
-        - bearerAuth: []
+      - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -275,26 +272,25 @@ paths:
                 value:
                   title: hotel
                   link: https://github.com/typicode/hotel
-                  description:
-                    Local app manager. Start apps within your browser,
+                  description: Local app manager. Start apps within your browser,
                     developer tool with local .localhost domain and https out of the
                     box.
                   tags:
-                    - node
-                    - organizing
-                    - webapps
-                    - domain
-                    - developer
-                    - https
-                    - proxy
+                  - node
+                  - organizing
+                  - webapps
+                  - domain
+                  - developer
+                  - https
+                  - proxy
       responses:
-        "201":
+        '201':
           description: Valid tool and token
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/CreateToolResponseBody"
-        "401":
+        '401':
           description: Unauthorized
           content:
             application/json:
@@ -313,7 +309,7 @@ paths:
                   value:
                     error: true
                     message: Authorization token expired
-        "422":
+        '422':
           description: Valid token and Invalid tool
           content:
             application/json:
@@ -323,21 +319,22 @@ paths:
     delete:
       summary: Delete tool with id
       security:
-        - bearerAuth: []
+      - bearerAuth: []
       parameters:
-        - name: id
-          in: path
+      - name: id
+        in: path
+        schema:
           type: integer
-          required: true
+        required: true
       responses:
-        "200":
+        '200':
           description: When id is valid
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        "400":
+        '400':
           description: When id is not valid
           content:
             application/json:
@@ -353,7 +350,7 @@ paths:
                   value:
                     error: true
                     message: tool with id 123456789 not found
-        "401":
+        '401':
           description: Unauthorized
           content:
             application/json:
@@ -375,7 +372,7 @@ paths:
   "/api/register":
     post:
       summary: Register user
-      description: ""
+      description: ''
       requestBody:
         required: true
         content:
@@ -383,7 +380,7 @@ paths:
             schema:
               "$ref": "#/components/schemas/UserRequestBody"
       responses:
-        "201":
+        '201':
           description: User registered
           content:
             application/json:
@@ -394,7 +391,7 @@ paths:
                     type: string
               example:
                 message: User registered successfully
-        "409":
+        '409':
           description: User is already registered
           content:
             application/json:
@@ -408,7 +405,7 @@ paths:
               example:
                 error: true
                 message: User already registered
-        "422":
+        '422':
           description: Unable to process content
           content:
             application/json:
@@ -422,7 +419,7 @@ paths:
             schema:
               "$ref": "#/components/schemas/UserRequestBody"
       responses:
-        "200":
+        '200':
           description: User logged
           content:
             application/json:
@@ -435,7 +432,7 @@ paths:
                     type: string
               example:
                 token: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1ODQwMjgyMSwiaWF0IjoxNjU4NDAyODIxfQ.HLGyf8OgnS6Xb3hELRcqYsn86TtxvWNjqDeXYItezUg
-        "401":
+        '401':
           description: User is not registered yet
           content:
             application/json:
@@ -444,7 +441,7 @@ paths:
               example:
                 error: true
                 message: Please register first
-        "409":
+        '409':
           description: User is already logged in
           content:
             application/json:
@@ -458,7 +455,7 @@ paths:
               example:
                 error: true
                 message: User already logged
-        "422":
+        '422':
           description: User has no email and password
           content:
             application/json:
@@ -468,11 +465,11 @@ paths:
   "/api/logout":
     delete:
       summary: Logout a user
-      description: ""
+      description: ''
       security:
-        - bearerAuth: []
+      - bearerAuth: []
       responses:
-        "200":
+        '200':
           description: User has been logout
           content:
             application/json:
@@ -483,7 +480,7 @@ paths:
                     type: string
               example:
                 message: User logged out
-        "401":
+        '401':
           description: Unauthorized
           content:
             application/json:

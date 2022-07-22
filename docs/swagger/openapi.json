@@ -5,11 +5,13 @@
         "title": "Backend-Challenge-Biztrip",
         "termsOfService": "http://swagger.io/terms/"
     },
+
     "servers": [
         {
             "url": "http://localhost:3000"
         }
     ],
+
     "components": {
         "securitySchemes": {
             "bearerAuth": {
@@ -18,10 +20,10 @@
                 "bearerFormat": "JWT"
             }
         },
+
         "schemas": {
             "UserRequestBody": {
                 "type": "object",
-                "required": true,
                 "properties": {
                     "email": {
                         "type": "string"
@@ -35,6 +37,7 @@
                     "password": "foobar-password"
                 }
             },
+
             "CreateToolRequestBody": {
                 "type": "object",
                 "required": [
@@ -43,6 +46,7 @@
                     "description",
                     "tags"
                 ],
+
                 "properties": {
                     "title": {
                         "type": "string"
@@ -60,6 +64,7 @@
                         }
                     }
                 },
+
                 "example": {
                     "title": "hotel",
                     "link": "https://github.com/typicode/hotel",
@@ -75,6 +80,7 @@
                     ]
                 }
             },
+
             "GetToolsResponseBody": {
                 "type": "object",
                 "properties": {
@@ -97,6 +103,7 @@
                         }
                     }
                 },
+
                 "example": [
                     {
                         "title": "beach",
@@ -127,11 +134,12 @@
                     }
                 ]
             },
+
             "CreateToolResponseBody": {
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "int"
+                        "type": "integer"
                     },
                     "title": {
                         "type": "string"
@@ -149,6 +157,7 @@
                         }
                     }
                 },
+
                 "example": {
                     "title": "hotel",
                     "link": "https://github.com/typicode/hotel",
@@ -165,6 +174,7 @@
                     "id": 5
                 }
             },
+
             "ErrorResponse": {
                 "type": "object",
                 "properties": {
@@ -176,6 +186,7 @@
                     }
                 }
             },
+
             "MultipleErrorResponse": {
                 "type": "object",
                 "properties": {
@@ -190,6 +201,7 @@
                     }
                 }
             },
+
             "UserLoggedResponse": {
                 "type": "object",
                 "properties": {
@@ -198,6 +210,7 @@
                     }
                 }
             },
+
             "InvalidToolBodyError": {
                 "type": "object",
                 "properties": {
@@ -234,6 +247,7 @@
                         }
                     }
                 },
+
                 "example": {
                     "message": "The given data was invalid.",
                     "errors": {
@@ -252,6 +266,7 @@
                     }
                 }
             },
+
             "TitleAlreadyUsedError": {
                 "type": "object",
                 "properties": {
@@ -270,6 +285,7 @@
                         }
                     }
                 },
+
                 "example": {
                     "message": "The given data was invalid.",
                     "errors": {
@@ -279,6 +295,7 @@
                     }
                 }
             },
+
             "InvalidTokenError": {
                 "type": "object",
                 "properties": {
@@ -289,11 +306,13 @@
                         "type": "string"
                     }
                 },
+
                 "example": {
                     "error": true,
                     "message": "Authorization token invalid format"
                 }
             },
+
             "RequestWithoutAuthorizationHeader": {
                 "type": "object",
                 "properties": {
@@ -304,11 +323,13 @@
                         "type": "string"
                     }
                 },
+
                 "example": {
                     "error": true,
                     "message": "Authorization header is required"
                 }
             },
+
             "InvalidUserError": {
                 "type": "object",
                 "properties": {
@@ -333,6 +354,7 @@
                         }
                     }
                 },
+
                 "example": {
                     "message": "The given data was invalid.",
                     "errors": {
@@ -347,6 +369,7 @@
             }
         }
     },
+
     "paths": {
         "/tools": {
             "get": {
@@ -355,9 +378,13 @@
                     {
                         "name": "tag",
                         "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
                         "required": false
                     }
                 ],
+
                 "responses": {
                     "200": {
                         "description": "success",
@@ -374,6 +401,7 @@
                     }
                 }
             },
+
             "post": {
                 "summary": "Create new tool",
                 "description": "To create a new tool you need to register in \"api/register\", and get the login token in \"api/login\".",
@@ -409,6 +437,7 @@
                         }
                     }
                 },
+
                 "responses": {
                     "201": {
                         "description": "Valid tool and token",
@@ -420,6 +449,7 @@
                             }
                         }
                     },
+
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -450,6 +480,7 @@
                             }
                         }
                     },
+
                     "422": {
                         "description": "Valid token and Invalid tool",
                         "content": {
@@ -463,6 +494,7 @@
                 }
             }
         },
+
         "/tools/{id}": {
             "delete": {
                 "summary": "Delete tool with id",
@@ -475,10 +507,13 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "type": "integer",
+                        "schema": {
+                            "type": "integer"
+                        },
                         "required": true
                     }
                 ],
+
                 "responses": {
                     "200": {
                         "description": "When id is valid",
@@ -491,6 +526,7 @@
                             }
                         }
                     },
+
                     "400": {
                         "description": "When id is not valid",
                         "content": {
@@ -506,6 +542,7 @@
                                         }
                                     }
                                 },
+
                                 "examples": {
                                     "when id is 123456789": {
                                         "value": {
@@ -517,6 +554,7 @@
                             }
                         }
                     },
+
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -524,6 +562,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/RequestWithoutAuthorizationHeader"
                                 },
+
                                 "examples": {
                                     "Without Authorization token": {
                                         "value": {
@@ -531,12 +570,14 @@
                                             "message": "Authorization token is required"
                                         }
                                     },
+
                                     "Invalid Authorization token": {
                                         "value": {
                                             "error": true,
                                             "message": "Authorization token invalid format"
                                         }
                                     },
+
                                     "Expired Authorization token": {
                                         "value": {
                                             "error": true,
@@ -550,6 +591,7 @@
                 }
             }
         },
+
         "/api/register": {
             "post": {
                 "summary": "Register user",
@@ -564,6 +606,7 @@
                         }
                     }
                 },
+
                 "responses": {
                     "201": {
                         "description": "User registered",
@@ -583,6 +626,7 @@
                             }
                         }
                     },
+
                     "409": {
                         "description": "User is already registered",
                         "content": {
@@ -598,6 +642,7 @@
                                         }
                                     }
                                 },
+
                                 "example": {
                                     "error": true,
                                     "message": "User already registered"
@@ -605,6 +650,7 @@
                             }
                         }
                     },
+
                     "422": {
                         "description": "Unable to process content",
                         "content": {
@@ -618,6 +664,7 @@
                 }
             }
         },
+
         "/api/login": {
             "post": {
                 "requestBody": {
@@ -629,6 +676,7 @@
                         }
                     }
                 },
+                
                 "responses": {
                     "200": {
                         "description": "User logged",
@@ -651,6 +699,7 @@
                             }
                         }
                     },
+                    
                     "401": {
                         "description": "User is not registered yet",
                         "content": {
@@ -665,6 +714,7 @@
                             }
                         }
                     },
+
                     "409": {
                         "description": "User is already logged in",
                         "content": {
@@ -680,6 +730,7 @@
                                         }
                                     }
                                 },
+
                                 "example": {
                                     "error": true,
                                     "message": "User already logged"
@@ -687,6 +738,7 @@
                             }
                         }
                     },
+
                     "422": {
                         "description": "User has no email and password",
                         "content": {
@@ -701,6 +753,7 @@
                 "summary": "Login a user"
             }
         },
+
         "/api/logout": {
             "delete": {
                 "summary": "Logout a user",
@@ -710,6 +763,7 @@
                         "bearerAuth": []
                     }
                 ],
+
                 "responses": {
                     "200": {
                         "description": "User has been logout",
@@ -723,12 +777,14 @@
                                         }
                                     }
                                 },
+
                                 "example": {
                                     "message": "User logged out"
                                 }
                             }
                         }
                     },
+
                     "401": {
                         "description" : "Unauthorized",
                         "content": {
@@ -736,6 +792,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/ErrorResponse"
                                 },
+
                                 "examples": {
                                     "Request without Authorization header": {
                                         "value": {
@@ -743,12 +800,14 @@
                                             "message": "Authorization header is required"
                                         }
                                     },
+
                                     "Authorization header expired": {
                                         "value": {
                                             "error": true,
                                             "message": "Authorization token expired"
                                         }
                                     },
+
                                     "Authorization token invalid format": {
                                         "value": {
                                             "error": true,
