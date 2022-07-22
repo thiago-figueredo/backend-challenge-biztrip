@@ -34,7 +34,7 @@ mysql> exit;
 
 ```
 
-### 4. Update create .env file with following variable
+### 4. Create .env file with following variable
 
 - DB_CONNECTION=mysql
 - DB_HOST=127.0.0.1
